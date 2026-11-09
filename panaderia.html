@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panadería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fffdf9;--ink:#2b2218;--muted:#6e6150;--gold:#b98d3e;--gold-d:#8a6420;--gold-l:#e8d3a4;--crumb:#f9f2e3;--ok:#5d8a4a}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;background:var(--crumb) radial-gradient(var(--gold-l) 1.2px,transparent 1.7px) 0 0/24px 24px;color:var(--ink);font-family:'Jost',system-ui,sans-serif;line-height:1.6}
+body::before{content:"";position:fixed;inset:10px;border:1px solid var(--gold-l);pointer-events:none;z-index:5}
+h1,h2,.serif,.arch span,.tile span{font-family:'Fraunces',Georgia,serif}
+svg{display:block}
+.awning{height:76px;filter:drop-shadow(0 3px 0 rgba(138,100,32,.22));background:repeating-linear-gradient(90deg,#dcb765 0 44px,#fbf3df 44px 88px);-webkit-mask:linear-gradient(#000,#000) top/100% 52px no-repeat,radial-gradient(circle at 22px 0,#000 21px,transparent 22px) 0 52px/44px 24px repeat-x;mask:linear-gradient(#000,#000) top/100% 52px no-repeat,radial-gradient(circle at 22px 0,#000 21px,transparent 22px) 0 52px/44px 24px repeat-x}
+#app{max-width:560px;margin:0 auto;padding:36px 24px 56px;display:flex;flex-direction:column;gap:34px}
+.hero{text-align:center}.hero .tr{width:22px;height:58px;color:var(--gold);margin:0 auto 10px}
+h1{font-weight:300;font-style:italic;font-size:clamp(2.6rem,11vw,4rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 8px}
+.hero p{margin:0;color:var(--muted)}
+.card{background:var(--paper);border:1px solid var(--gold);outline:1px solid var(--gold-l);outline-offset:6px;padding:28px 22px}
+.card h2{font-weight:400;font-style:italic;font-size:1.5rem;margin:0 0 16px;text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.arch{display:flex;flex-direction:column;align-items:center;gap:8px;padding:44px 10px 16px;background:var(--paper);color:var(--ink);border:1px solid var(--gold);border-radius:999px 999px 0 0;font-size:1.05rem;font-style:italic;cursor:pointer;transition:background .2s}
+.arch:hover{background:#fbf3df}
+.tile{display:flex;flex-direction:column;align-items:center;gap:4px;width:92px;padding:12px 6px 8px;background:var(--paper);color:var(--ink);border:1px solid var(--gold);border-radius:999px 999px 3px 3px;cursor:pointer;font-size:.8rem;font-style:italic}
+.tile:disabled{background:var(--crumb);opacity:.55;cursor:default}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold-d);outline-offset:3px}
+.btn{position:relative;font:500 1rem 'Jost',sans-serif;letter-spacing:.04em;padding:14px 34px;background:var(--ink);color:#f6e6c0;border:0;cursor:pointer;transition:background .25s,color .25s}
+.btn::after{content:"";position:absolute;inset:4px;border:1px solid var(--gold);pointer-events:none}
+.btn:hover:not(:disabled){background:var(--gold);color:var(--ink)}.btn:disabled{opacity:.45;cursor:default}
+.link{background:none;border:0;color:var(--gold-d);font:inherit;text-decoration:underline;cursor:pointer;padding:4px}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.head h2{margin:0;font-size:1.25rem}.dots{display:flex;gap:7px}
+.dots i{width:8px;height:8px;border:1px solid var(--gold);transform:rotate(45deg)}.dots i.on{background:var(--gold)}
+.say{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.25rem;text-align:center;margin:0 0 6px}
+.stage{min-height:310px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;user-select:none;-webkit-user-select:none}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.sprite{display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.sprite img{width:100%;height:100%;object-fit:contain}
+.bar{position:relative;width:100%;height:14px;background:#fff;border:1px solid var(--gold)}
+.bar>i{position:absolute;inset:0 auto 0 0;width:0;background:var(--gold)}
+.bar>b{position:absolute;top:0;bottom:0;background:rgba(93,138,74,.5);border-inline:1px solid var(--ok)}
+.pop{animation:pop .2s}@keyframes pop{50%{transform:scale(1.1,.92)}}
+.shelf{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding-bottom:12px;border-bottom:4px double var(--gold-l);min-height:60px;align-items:flex-end}
+.empty{color:var(--muted);font-style:italic;margin:0}
+.back{text-align:center;color:var(--gold-d)}
+@media(prefers-reduced-motion:reduce){.pop{animation:none}.btn,.arch{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="trigo" viewBox="0 0 24 64"><path d="M12 62V12" stroke="currentColor" stroke-width="1.5" fill="none"/><g fill="currentColor"><ellipse cx="12" cy="7" rx="3" ry="6"/><ellipse cx="6.5" cy="19" rx="3" ry="6" transform="rotate(-35 6.5 19)"/><ellipse cx="17.5" cy="19" rx="3" ry="6" transform="rotate(35 17.5 19)"/><ellipse cx="6.5" cy="32" rx="3" ry="6" transform="rotate(-35 6.5 32)"/><ellipse cx="17.5" cy="32" rx="3" ry="6" transform="rotate(35 17.5 32)"/><ellipse cx="6.5" cy="45" rx="3" ry="6" transform="rotate(-35 6.5 45)"/><ellipse cx="17.5" cy="45" rx="3" ry="6" transform="rotate(35 17.5 45)"/></g></symbol></svg>
+<div class="awning" aria-hidden="true"></div>
+<div id="app"></div>
+<script>
+/* ============ CONFIGURACIÓN ============ */
+const NOMBRE = 'Angie';            // opcional: "Panadería de ..."
+const VOLVER = 'index.html'; // enlace al pie del menú (déjalo vacío para quitarlo)
+
+/* Imágenes: guarda cada PNG en la carpeta img/ con el nombre de su clave (img/harina.png).
+   Si un archivo no existe, se muestra un emoji temporal. Claves necesarias:
+   ingredientes: harina agua sal levadura mantequilla leche azucar huevo canela
+   utensilios:   bowl masa horno
+   extras:       ninguno semillas harina_top almendras chocolate vainilla fresa glaseado nueces
+   panes (x3):   <id>_crudo  <id>_perfecto  <id>_quemado   (id = basico, baguette, croissant, concha, rollo) */
+const NAMES = {azucar:'Azúcar', harina_top:'Harina', ninguno:'Sin extra'};
+const EMOJI = {harina:'🌾',agua:'💧',sal:'🧂',levadura:'🧫',mantequilla:'🧈',leche:'🥛',azucar:'🍬',huevo:'🥚',canela:'🍂',bowl:'🥣',masa:'🫓',horno:'🔥',
+  ninguno:'✖️',semillas:'🌱',harina_top:'🤍',almendras:'🥜',chocolate:'🍫',vainilla:'🍦',fresa:'🍓',glaseado:'🍥',nueces:'🌰'};
+const SOUNDS = {add:null, knead:null, done:null, bake:null, fail:null}; // rutas opcionales (ej: 'sfx/tap.mp3')
+
+/* ============ RECETAS (solo datos) ============ */
+// rec(id, nombre, emoji, ingredientes, extras a elegir, opciones)
+const rec = (id, name, emoji, items, options, o = {}) => ({id, name, emoji, steps:[
+  {type:'add', text:'Eche los ingredientes al bowl', items},
+  {type:'mix', text:'Mezcle con movimientos circulares', turns:o.turns || 3},
+  {type:'knead', text:'Amase la masa', taps:o.knead || 15},
+  ...(o.fold ? [{type:'knead', text:'Doble la masa para formar capas', taps:3, label:'Doblar'}] : []),
+  {type:'rest', text:'La masa esta reposando...', seconds:5},
+  {type:'choose', text:o.choose || 'Elija cómo decorarlo', options},
+  {type:'bake', text:'Sácalo cuando la barra esté en la zona verde', seconds:o.secs || 8, sweet:o.sweet || [.62,.85]},
+]});
+const RECIPES = [
+  rec('basico', 'Pan básico', '🍞', ['harina','agua','sal','levadura'], ['ninguno','semillas','harina_top']),
+  rec('baguette', 'Baguette', '🥖', ['harina','agua','sal','levadura'], ['ninguno','semillas','harina_top'], {knead:20, secs:9, sweet:[.66,.84]}),
+  rec('croissant', 'Croissant', '🥐', ['harina','mantequilla','leche','azucar','levadura'], ['ninguno','almendras','chocolate'], {knead:10, fold:true, sweet:[.7,.86]}),
+  rec('concha', 'Concha', '🧁', ['harina','azucar','mantequilla','huevo'], ['vainilla','chocolate','fresa'], {knead:12, choose:'Elige la cobertura'}),
+  rec('rollo', 'Rollo de canela', '🌀', ['harina','azucar','mantequilla','canela'], ['glaseado','nueces','ninguno'], {turns:2, knead:12, sweet:[.6,.82]}),
+];
+
+/* ============ UTILIDADES ============ */
+const $app = document.getElementById('app');
+const el = (t, c, h) => { const e = document.createElement(t); if (c) e.className = c; if (h != null) e.innerHTML = h; return e; };
+const sfx = n => { if (SOUNDS[n]) new Audio(SOUNDS[n]).play().catch(() => {}); };
+const label = k => NAMES[k] || k[0].toUpperCase() + k.slice(1);
+function emoji(k) {
+  if (EMOJI[k]) return EMOJI[k];
+  const [id, q] = k.split('_');
+  return q === 'crudo' ? '⚪' : q === 'quemado' ? '⬛' : (RECIPES.find(r => r.id === id) || {emoji:'🍞'}).emoji;
+}
+function sprite(k, size = 64) {
+  const d = el('div', 'sprite'); d.style.cssText = `width:${size}px;height:${size}px;font-size:${size * .6}px`;
+  d.textContent = emoji(k);
+  const i = new Image(); i.alt = k; i.onload = () => { d.textContent = ''; d.append(i); }; i.src = `img/${k}.png`;
+  return d;
+}
+function tile(k, onclick) { const b = el('button', 'tile'); b.append(sprite(k, 52), el('span', null, label(k))); b.onclick = onclick; return b; }
+function bar() { const b = el('div', 'bar'), f = el('i'); b.append(f); return {el:b, set:p => f.style.width = Math.min(100, p * 100) + '%'}; }
+const pop = n => { n.classList.remove('pop'); void n.offsetWidth; n.classList.add('pop'); };
+const saved = () => { try { return JSON.parse(localStorage.getItem('panaderia') || '[]'); } catch { return []; } };
+const save = i => { try { localStorage.setItem('panaderia', JSON.stringify([...saved(), i].slice(-24))); } catch {} };
+
+/* ============ PASOS (cada tipo es una mini-interacción) ============ */
+const STEPS = {
+  add(step, box, done) {
+    const bowl = sprite('bowl', 150), row = el('div', 'row'); let n = 0;
+    step.items.forEach(k => { const t = tile(k, () => { t.disabled = true; sfx('add'); pop(bowl); if (++n === step.items.length) setTimeout(done, 350); }); row.append(t); });
+    box.append(bowl, row);
+  },
+  mix(step, box, done) {
+    const bowl = sprite('bowl', 190), p = bar(); let last = null, total = 0;
+    box.style.touchAction = 'none'; box.append(bowl, p.el);
+    box.onpointermove = e => {
+      if (!(e.buttons & 1)) { last = null; return; }
+      const r = bowl.getBoundingClientRect(), a = Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2));
+      if (last !== null) { let d = a - last; if (d > Math.PI) d -= 2 * Math.PI; if (d < -Math.PI) d += 2 * Math.PI; total += Math.abs(d); }
+      last = a; const pr = total / (2 * Math.PI * step.turns); p.set(pr);
+      bowl.style.transform = `rotate(${Math.sin(total * 2) * 7}deg)`;
+      if (pr >= 1) { box.onpointermove = null; sfx('done'); setTimeout(done, 300); }
+    };
+  },
+  knead(step, box, done) {
+    const m = sprite('masa', 170), p = bar(); let n = 0;
+    const hit = () => { sfx('knead'); pop(m); p.set(++n / step.taps); if (n >= step.taps) { m.onpointerdown = null; if (btn) btn.disabled = true; setTimeout(done, 300); } };
+    const btn = step.label ? el('button', 'btn', step.label) : null;
+    if (btn) btn.onclick = hit; else { m.style.cursor = 'pointer'; m.onpointerdown = hit; }
+    box.append(m, p.el); if (btn) box.append(btn);
+  },
+  rest(step, box, done) {
+    const m = sprite('masa', 150), p = bar(), t0 = performance.now(); box.append(m, p.el);
+    box.dataset.timer = setInterval(() => { const pr = (performance.now() - t0) / (step.seconds * 1000); p.set(pr); if (pr >= 1) done(); }, 80);
+  },
+  choose(step, box, done, run) {
+    const row = el('div', 'row');
+    step.options.forEach(k => row.append(tile(k, () => { run.deco = k; sfx('add'); done(); })));
+    box.append(sprite('masa', 130), row);
+  },
+  bake(step, box, done, run) {
+    const [s0, s1] = step.sweet, p = bar(), zone = el('b'), out = el('button', 'btn', '¡Sacar!'), t0 = performance.now();
+    zone.style.left = s0 * 100 + '%'; zone.style.width = (s1 - s0) * 100 + '%'; p.el.append(zone);
+    const finish = pr => {
+      clearInterval(box.dataset.timer); out.disabled = true;
+      run.quality = pr < s0 ? 'crudo' : pr <= s1 ? 'perfecto' : 'quemado';
+      sfx(run.quality === 'perfecto' ? 'done' : 'fail'); setTimeout(done, 450);
+    };
+    box.dataset.timer = setInterval(() => { const pr = (performance.now() - t0) / (step.seconds * 1000); p.set(pr); sfx('bake'); if (pr >= 1) finish(1.01); }, 80);
+    out.onclick = () => finish((performance.now() - t0) / (step.seconds * 1000));
+    const r = el('div', 'row'); r.append(sprite('horno', 120), sprite(run.recipe.id + '_crudo', 96));
+    box.append(r, p.el, out);
+  },
+};
+
+/* ============ PANTALLAS ============ */
+function menu() {
+  $app.innerHTML = '';
+  const h = el('header', 'hero', `<svg class="tr" aria-hidden="true"><use href="#trigo"/></svg><h1>${NOMBRE ? `Panadería de ${NOMBRE}` : 'Panadería'}</h1><p>¿Que va a llevar joven?</p>`);
+  const grid = el('div', 'grid');
+  RECIPES.forEach(r => { const b = el('button', 'arch'); b.append(sprite(r.id + '_perfecto', 84), el('span', null, r.name)); b.onclick = () => play(r); grid.append(b); });
+  const v = el('section', 'card', '<h2>Mi vitrina</h2>'), shelf = el('div', 'shelf'), items = saved();
+  if (!items.length) shelf.append(el('p', 'empty', 'Aún está vacía. ¡Hornea tu primer pan!'));
+  items.slice().reverse().forEach(i => shelf.append(sprite(i.recipe + '_' + i.quality, 52)));
+  v.append(shelf); $app.append(h, grid, v);
+  if (VOLVER) {
+    const link = el('a', 'back', 'Volver a la carta');
+    link.href = VOLVER;
+    $app.append(link);
+}
+}
+
+function play(recipe) {
+  const run = {recipe, i:0, quality:'perfecto', deco:'ninguno'};
+  const next = () => {
+    clearInterval(stage.dataset.timer); stage.onpointermove = null; stage.style.touchAction = '';
+    if (run.i >= recipe.steps.length) return result(run);
+    const step = recipe.steps[run.i++];
+    say.textContent = step.text; [...dots.children].forEach((d, k) => d.classList.toggle('on', k < run.i));
+    stage.innerHTML = ''; STEPS[step.type](step, stage, next, run);
+  };
+  $app.innerHTML = '';
+  const head = el('div', 'head'), quit = el('button', 'link', 'Salir'), dots = el('div', 'dots');
+  recipe.steps.forEach(() => dots.append(el('i')));
+  quit.onclick = () => { clearInterval(stage.dataset.timer); menu(); };
+  head.append(quit, el('h2', null, recipe.name), dots);
+  const card = el('section', 'card'), say = el('p', 'say'), stage = el('div', 'stage');
+  card.append(say, stage); $app.append(head, card); next();
+}
+
+function result(run) {
+  const q = run.quality, msg = {perfecto:'¡Quedó perfecto!', crudo:'Quedó crudo… ¡inténtalo otra vez!', quemado:'Se quemó… ¡inténtalo otra vez!'}[q];
+  save({recipe:run.recipe.id, quality:q, deco:run.deco, date:Date.now()});
+  $app.innerHTML = '';
+  const card = el('section', 'card'), stage = el('div', 'stage');
+  stage.append(sprite(run.recipe.id + '_' + q, 190), el('p', 'say', msg));
+  const row = el('div', 'row'), again = el('button', 'btn', 'Hornear otro'), back = el('button', 'btn', 'Volver al menú');
+  again.onclick = () => play(run.recipe); back.onclick = menu; row.append(again, back);
+  card.append(el('h2', null, run.recipe.name), stage, row); $app.append(card);
+}
+
+menu();
+</script>
+</body>
+</html>

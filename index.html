@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para usted, con cariño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fffdf9;--ink:#2b2218;--muted:#6e6150;--gold:#b98d3e;--gold-d:#8a6420;--gold-l:#e8d3a4;--crumb:#f9f2e3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Jost',system-ui,sans-serif;line-height:1.7}
+body::before{content:"";position:fixed;inset:10px;border:1px solid var(--gold-l);pointer-events:none;z-index:5}
+h1,h2,.slot,.quote,.item,.card p{font-family:'Fraunces',Georgia,serif}
+svg{display:block}
+
+/* Toldo de panadería */
+.awning{height:76px;filter:drop-shadow(0 3px 0 rgba(138,100,32,.22));
+  background:repeating-linear-gradient(90deg,#dcb765 0 44px,#fbf3df 44px 88px);
+  -webkit-mask:linear-gradient(#000,#000) top/100% 52px no-repeat,radial-gradient(circle at 22px 0,#000 21px,transparent 22px) 0 52px/44px 24px repeat-x;
+  mask:linear-gradient(#000,#000) top/100% 52px no-repeat,radial-gradient(circle at 22px 0,#000 21px,transparent 22px) 0 52px/44px 24px repeat-x}
+
+/* Ornamentos */
+.orn{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--gold)}
+.orn::before,.orn::after{content:"";height:1px;width:min(18vw,110px);background:var(--gold-l)}
+.orn svg{width:34px;height:34px}.orn .tr{width:16px;height:42px}
+
+/* Portada */
+.hero{text-align:center;padding:56px 24px 24px;max-width:960px;margin:0 auto}
+.hero .tr{width:22px;height:58px;color:var(--gold);margin:0 auto 14px}
+h1{font-weight:300;font-style:italic;font-size:clamp(2.6rem,8vw,5.2rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 18px}
+.lead{font-size:1.12rem;color:var(--muted);max-width:30em;margin:0 auto}
+.window{display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,3vw,32px);margin-top:48px}
+.arch{padding:clamp(5px,1.2vw,10px);border:1px solid var(--gold);border-radius:999px 999px 0 0;position:relative}
+.arch.side{width:27%;max-width:230px}.arch.mid{width:38%;max-width:330px}
+.slot{position:relative;overflow:hidden;margin:0;background:var(--crumb);display:grid;place-items:center;text-align:center;padding:12px;font-style:italic;font-size:clamp(.7rem,2vw,.95rem);color:var(--gold-d)}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arch .slot{aspect-ratio:3/4;border-radius:999px 999px 0 0}
+.seal{position:absolute;right:-14%;top:-6%;width:clamp(70px,16vw,118px);color:var(--gold);transform:rotate(12deg)}
+
+/* Carta */
+.band{margin-top:64px;padding:104px 24px 88px;background:var(--crumb) radial-gradient(var(--gold-l) 1.2px,transparent 1.7px) 0 0/24px 24px}
+.card{position:relative;max-width:680px;margin:0 auto;background:var(--paper);border:1px solid var(--gold);outline:1px solid var(--gold-l);outline-offset:6px;padding:92px clamp(24px,6vw,64px) 52px}
+.medal{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:136px;aspect-ratio:1;border:1px solid var(--gold);border-radius:50%;padding:6px;background:var(--paper)}
+.medal .slot{width:100%;height:100%;border-radius:50%;font-size:.8rem}
+.card h2{font-weight:400;font-style:italic;font-size:1.9rem;margin:0 0 26px;text-align:center}
+.card p{font-weight:300;font-size:1.18rem;line-height:1.85;margin:0 0 1.25em}
+.quote{text-align:center;font-style:italic;font-weight:300;color:var(--gold-d);font-size:1.1rem;margin:36px 0 0}
+.sign{font-style:italic;color:var(--gold-d);text-align:right}
+
+/* Receta */
+.recipe{max-width:720px;margin:0 auto;padding:80px 24px 72px;text-align:center}
+.recipe h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(1.8rem,4.5vw,2.6rem);margin:22px 0 6px}
+.recipe>p{margin:0 0 36px;color:var(--muted)}
+.list{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--gold-l)}
+.item{padding:24px 16px;font-style:italic;font-weight:300;font-size:1.15rem;display:flex;gap:12px;align-items:center;justify-content:center}
+.item::before{content:"";flex:none;width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+.item:nth-child(odd){border-right:1px solid var(--gold-l)}.item:nth-child(-n+2){border-bottom:1px solid var(--gold-l)}
+
+/* Cierre */
+.cta{background:var(--ink);color:#f6e6c0;text-align:center;padding:84px 24px 40px;border-top:4px double var(--gold)}
+.cta .orn::before,.cta .orn::after{background:#5b4a2c}
+.cta h2{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;margin:24px 0 10px}
+.cta p{color:#cdbb95;margin:0}
+.btn{display:inline-block;position:relative;margin-top:32px;padding:18px 46px;background:var(--gold);color:var(--ink);text-decoration:none;font-weight:500;letter-spacing:.04em;transition:background .25s}
+.btn::after{content:"";position:absolute;inset:5px;border:1px solid var(--ink);pointer-events:none}
+.btn:hover{background:#f6e6c0}
+.btn:focus-visible{outline:2px solid #f6e6c0;outline-offset:4px}
+footer{margin-top:64px;font-size:.85rem;color:#a89870}
+
+.hero>*{animation:in 1s cubic-bezier(.2,.7,.2,1) both}.hero>.window{animation-delay:.25s}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+@media(prefers-reduced-motion:reduce){.hero>*{animation:none}.btn{transition:none}}
+@media(max-width:520px){.list{grid-template-columns:1fr}.item:nth-child(odd){border-right:0}.item:not(:last-child){border-bottom:1px solid var(--gold-l)}.seal{right:-8%}.medal{width:116px}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="trigo" viewBox="0 0 24 64"><path d="M12 62V12" stroke="currentColor" stroke-width="1.5" fill="none"/><g fill="currentColor"><ellipse cx="12" cy="7" rx="3" ry="6"/><ellipse cx="6.5" cy="19" rx="3" ry="6" transform="rotate(-35 6.5 19)"/><ellipse cx="17.5" cy="19" rx="3" ry="6" transform="rotate(35 17.5 19)"/><ellipse cx="6.5" cy="32" rx="3" ry="6" transform="rotate(-35 6.5 32)"/><ellipse cx="17.5" cy="32" rx="3" ry="6" transform="rotate(35 17.5 32)"/><ellipse cx="6.5" cy="45" rx="3" ry="6" transform="rotate(-35 6.5 45)"/><ellipse cx="17.5" cy="45" rx="3" ry="6" transform="rotate(35 17.5 45)"/></g></symbol>
+  <symbol id="pan" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 31c0-9 8-15 18-15s18 6 18 15c0 4-3 6-6 6H12c-3 0-6-2-6-6z"/><path d="M15 23c2 3 3 6 3 9M24 20c2 3 3 7 3 11M33 23c2 3 3 6 3 9"/></g></symbol>
+  <symbol id="baguette" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" transform="rotate(-30 24 24)"><rect x="3" y="17" width="42" height="14" rx="7"/><path d="M12 18l3 12M21 18l3 12M30 18l3 12"/></g></symbol>
+</svg>
+
+<div class="awning" aria-hidden="true"></div>
+
+<header class="hero">
+  <svg class="tr" aria-hidden="true"><use href="#trigo"/></svg>
+  <h1>Panaderia <span data-nombre>chamita</span>.</h1>
+  <p class="lead">Una pequeña carta para la mejor panadera del mundo (las fotos se actualizaran cada que haga mas pan).</p>
+
+  <!-- Fotos: img/pan-1.jpg, img/pan-2.jpg, img/pan-3.jpg -->
+  <div class="window">
+    <div class="arch side"><figure class="slot">foto del pan de hoy<img src="img/pan-1.jpg" alt="Pan recién horneado" onerror="this.remove()"></figure></div>
+    <div class="arch mid">
+      <figure class="slot"><img src="croissant.jpeg" alt="Croissant sobre una mesa" onerror="this.remove()"></figure>
+      <svg class="seal" viewBox="0 0 120 120" style="color:#b98d3e" aria-hidden="true">
+        <defs><path id="ring" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs>
+        <circle cx="60" cy="60" r="57" fill="#fffdf9" stroke="currentColor"/>
+        <circle cx="60" cy="60" r="33" fill="none" stroke="#e8d3a4"/>
+        <text font-family="Fraunces,serif" font-style="italic" font-size="12" letter-spacing="2.6" fill="#8a6420"><textPath href="#ring">hecho a mano, con mucho cariño, </textPath></text>
+        <use href="#trigo" x="48" y="42" width="24" height="36"/>
+      </svg>
+    </div>
+    <div class="arch side"><figure class="slot">Foto del pan de mañana<img src="img/pan-3.jpg" alt="Masa y harina" onerror="this.remove()"></figure></div>
+  </div>
+</header>
+
+<section class="band">
+  <article class="card">
+    <div class="medal"><figure class="slot"><img src="chama.jpeg" alt="Chamita" onerror="this.remove()"></figure></div>
+    <h2>Querida <span data-nombre>amiga</span>:</h2>
+    <p>Hay cosas que necesitan tiempo para hacerse bien, y creo que el pan es una de esas. No se hace de un momento a otro, necesita paciencia, cariño y dedicacion para que al final salga algo bonito.</p>
+    <p>Usted para mi es una persona muy especial, significa demasiado para mí. Espero que los tropiesos, los problemas o los errores no borren su determinación por lograr las cosas.</p>
+    <p>Gracias por estar, por escucharme, por hacer que todo sea más fácil y mas bonito. Por eso quise preparar este pequeño regalo. No es algo grande ni mucho menos, pero tiene un poquito de mi tiempo, esfuerzo y cariño. Queria que tuviera algo especial, algo que pudiera disfrutar y que le recordara que hay alguien que la aprecia muchisimo.</p>
+    <p>Esta pagina la hago, para que le de esperanza, energia y motivacion a seguir con la panaderia. Porque usted puede, porque lo va a lograr y porque usted es una crack que se merece lo mejor.</p>
+    <p>Echele ganas y acuerdese "todos pendejos menos usted y yo".</p>
+    <p class="sign">Con todo el cariño,<br>Miguel.</p>
+    <p class="quote">Lo mejor del pan es compartirlo. (conmigo jeje)</p>
+  </article>
+</section>
+
+<section class="recipe">
+  <div class="orn"><svg class="tr"><use href="#trigo"/></svg><svg><use href="#pan"/></svg><svg><use href="#baguette"/></svg><svg><use href="#pan"/></svg><svg class="tr"><use href="#trigo"/></svg></div>
+  <h2>Pasos para hacer pan de payaso: </h2>
+  <div class="list">
+    <div class="item">Tres tazas de payaso</div>
+    <div class="item">Una pizca de chistes babosos</div>
+    <div class="item">Tiempo, para que amarre</div>
+    <div class="item">Y mucho chocholate</div>
+  </div>
+    <br>
+  
+  <p>Mentira ahora si le digo algo bonito: </p>
+  <div class="orn"><svg class="tr"><use href="#trigo"/><svg class="tr"><use href="#trigo"/></svg></div>
+  <h2>La panadera mas crack del jodido mundo.</h2>
+  <div class="list">
+    <div class="item">La mas pro del mundo mundial, nadie llega su level</div>
+    <div class="item">La mas chistosita, nadie dice las babosadas q usted dice</div>
+    <div class="item">La inigualable, la que todo el mundo le tiene envidia pq son unos imbeciles de mierda</div>
+    <div class="item">La ancestral, la unica y la mejor, mi chama</div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="orn"><svg class="tr"><use href="#trigo"/></svg><svg><use href="#pan"/></svg><svg class="tr"><use href="#trigo"/></svg></div>
+  <h2>Tengo una sorpresa en el horno jeje</h2>
+  <p>Hornee los panes que quiera, a su manera.</p>
+  <a class="btn" href="panaderia.html">Hornear mi pan</a>
+  <h3>La quiero mucho. Espero le haya gustado todo esto.</h3>
+  <footer>PANADERAAAA 🗣️‼️ <BR> EEEY <BR> FIUUUUU <BR> JUEPUTA YA SE FUE</footer>
+</section>
+
+<script>
+  // Escribe aquí su nombre (déjalo vacío para usar el texto por defecto)
+  const NOMBRE = 'Angie';
+  if (NOMBRE) document.querySelectorAll('[data-nombre]').forEach(e => e.textContent = NOMBRE);
+</script>
+</body>
+</html>
